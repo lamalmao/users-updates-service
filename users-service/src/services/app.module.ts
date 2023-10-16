@@ -15,8 +15,6 @@ import { UpdatesService } from './updates.service.js';
     }),
     HttpModule,
     ConfigModule.forRoot({
-      envFilePath: '.settings.env',
-      ignoreEnvFile: true,
       isGlobal: true
     })
   ],

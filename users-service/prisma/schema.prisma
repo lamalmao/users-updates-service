@@ -11,20 +11,22 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
   email    String
   number   Int?
-  joinDate DateTime  @default(now())
-  Actions  Actions[]
+  joinDate DateTime @default(now())
+  Actions  Action[]
 }
 
-model Actions {
+model Action {
   id     Int      @id @default(autoincrement())
   ip     String
-  userId Int
-  user   User     @relation(fields: [userId], references: [id])
+  userId Int?
+  user   User?    @relation(fields: [userId], references: [id])
   date   DateTime
   action String
   data   String?
+
+  @@map("Action")
 }

@@ -11,7 +11,8 @@
     "dev": "npx ts-node-esm src/app.ts",
     "start": "node dist/app.js",
     "lint": "npx eslint src/ --fix",
-    "build": "npx rimraf dist && npx tsc"
+    "build": "npx rimraf dist && npx tsc",
+    "install": "npx prisma generate && npx prisma migrate deploy && yarn run build"
   },
   "devDependencies": {
     "@types/node": "^20.8.5",

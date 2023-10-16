@@ -15,6 +15,15 @@ import { Prisma } from '@prisma/client';
 import { Serializable, UpdatesService } from '../updates.service.js';
 import { Request } from 'express';
 
+function getIp(str: string): string | null {
+  const data = /(((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4})/.exec(str);
+  if (!data) {
+    return null;
+  }
+
+  return data[0];
+}
+
 function getErrorData(error: PrismaClientKnownRequestError): HttpException {
   let message: string;
   let code: HttpStatus = HttpStatus.BAD_REQUEST;
@@ -70,7 +79,7 @@ export class UserController {
         .notify({
           type: 'created',
           date: new Date(),
-          ip: request.ip,
+          ip: getIp(request.socket.remoteAddress || '') || '0.0.0.0',
           target: user.id,
           data: user as Serializable
         })
@@ -102,7 +111,7 @@ export class UserController {
         .notify({
           type: 'updated',
           date: new Date(),
-          ip: request.ip,
+          ip: getIp(request.socket.remoteAddress || '') || '0.0.0.0',
           target: user.id,
           data: body.update as Serializable
         })
@@ -130,7 +139,7 @@ export class UserController {
         .notify({
           type: 'created',
           date: new Date(),
-          ip: request.ip,
+          ip: getIp(request.socket.remoteAddress || '') || '0.0.0.0',
           target: user.id
         })
         .catch(() => null);

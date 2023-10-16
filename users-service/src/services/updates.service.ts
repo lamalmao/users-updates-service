@@ -21,8 +21,10 @@ export class UpdatesService {
     private readonly configService: ConfigService
   ) {}
 
-  async notify(update: UpdateData) {
-    return this.httpService.post(
+  notify(update: UpdateData) {
+    // prettier-ignore
+
+    return this.httpService.axiosRef.post(
       `${this.configService.get<string>('UPDATES_SERVER_HOST')}/updates/create`,
       {
         update
