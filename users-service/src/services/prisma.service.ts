@@ -43,32 +43,3 @@ export class PrismaExtendedClientConfigService
     return prismaExtendedClient;
   }
 }
-
-// @Injectable()
-// export class PrismaService extends PrismaClient implements OnModuleInit {
-//   async onModuleInit() {
-//     await this.$extends({
-//       query: {
-//         user: {
-//           create({ args, query }) {
-//             args.data = UserInput.parse(args.data);
-//             return query(args);
-//           },
-//           update({ args, query }) {
-//             args.data = UserInput.partial().parse(args.data);
-//             return query(args);
-//           },
-//           updateMany({ args, query }) {
-//             args.data = UserInput.partial().parse(args.data);
-//             return query(args);
-//           },
-//           upsert({ args, query }) {
-//             args.create = UserInput.parse(args.create);
-//             args.update = UserInput.partial().parse(args.update);
-//             return query(args);
-//           }
-//         }
-//       }
-//     }).$connect();
-//   }
-// }
